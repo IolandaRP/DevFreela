@@ -23,6 +23,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ### Backend:
 - ASP.NET Core
 - C#
+- Swagger
 
 ## :key: Licença:
 
