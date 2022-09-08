@@ -21,7 +21,7 @@ Projeto desenvolvido na Formação ASP.NET Core do Método .Net Direto ao Ponto 
 Este projeto foi desenvolvido com as seguintes tecnologias:
 
 ### Backend:
-- [.NET][dotnet]
+- [ASP.NET Core][asp net core]
 - [C#][csharp]
 
 ## :key: Licença:
