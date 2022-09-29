@@ -18,7 +18,6 @@ namespace DevFreela.Api.Controllers
         [HttpGet]
         public IActionResult Get(string query)
         {
-            //Buscar ou filtrar todos os projetos
             return Ok();
         }
 
