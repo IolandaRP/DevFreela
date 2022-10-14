@@ -26,6 +26,7 @@ namespace DevFreela.Application.Services.Inplementations
             var user = new User(inputModel.FullName, inputModel.Email, inputModel.BirthDate);
 
             users.Add(user);
+            _dbContext.SaveChanges();
             return user.Id;
         }
 
