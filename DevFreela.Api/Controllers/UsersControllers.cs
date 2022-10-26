@@ -1,4 +1,7 @@
 ﻿using DevFreela.Api.Models;
+using DevFreela.Application.Commands.CreateUser;
+using DevFreela.Application.Queries.GetUser;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevFreela.Api.Controllers
@@ -6,22 +9,38 @@ namespace DevFreela.Api.Controllers
     [Route("api/users")]
     public class UsersControllers : ControllerBase
     {
-        [HttpGet("{id}")]
-        public IActionResult GetById (int id)
+        private readonly IMediator _mediator;
+        public UsersControllers(IMediator mediator)
         {
-            return Ok();
+            _mediator = mediator;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById (int id)
+        {
+            var query = new GetUserQuery(id);
+            var user = await _mediator.Send(query);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] CreateUserModel createUser)
+        public async Task<IActionResult> Post([FromBody] CreateUserCommand command)
         {
-            return CreatedAtAction(nameof(GetById), new { id = 1 }, createUser);
+            var id = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
         //api/users/1/login
         [HttpPut("{id}/login")]
         public IActionResult Login(int id, [FromBody] LoginModel login)
         {
+            // TODO: Para Módulo de Autenticação e Autorização
             return NoContent();
         }
     }
